@@ -33,10 +33,11 @@ function isPalindrome(str, i=0) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-  if (arr.length === 0) return false
-  let currVal = arr.pop()
-  return currVal === val || findIndex(arr, val) ? 1 : -1
+function findIndex(arr, val, i=0) {
+  if (arr.length === 0 || i >= arr.length) return -1
+  let currVal = arr[i]
+  if (currVal === val) return i
+  else return findIndex(arr, val, i+1)
 }
 
 /** revString: return a copy of a string, but in reverse. */
@@ -65,20 +66,31 @@ function gatherStrings(obj) {
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
-// [1,2,3,4]
-//  ^
 
-// [1,2,3,4,5,6,7]
-//  ^
+// [1,2,3,4],3
+//    ^
 
+function binarySearch(arr, val , start=0, end=0) {
+  let halfWayPoint = 0
+  if(end === 0){
+    halfWayPoint = Math.floor(arr.length/2) - 1
+  }
+  else{
+    halfWayPoint = start + Math.floor((end-start)/2)
+  }
 
-function binarySearch(arr, val) {
-  if (arr.length <= 1 && arr[0] !== val) return -1
-  const halfWayPoint = Math.floor(arr.length/2)
-  if (arr[halfWayPoint] === val) return halfWayPoint
-  else if (arr[halfWayPoint] > val) return binarySearch(arr.slice(0, halfWayPoint-1), val)
-  else if (arr[halfWayPoint] < val) return binarySearch(arr.slice(halfWayPoint+1, arr.length-1), val)
+  if(halfWayPoint === 0 && arr[halfWayPoint] !== val) return -1
+
+  else if (arr[halfWayPoint] === val) return halfWayPoint
+
+  else if (arr[halfWayPoint] > val) {
+    return binarySearch(arr, val, start=0, end=halfWayPoint)
+  }
+  else if (arr[halfWayPoint] < val) {
+    return binarySearch(arr, val, start=halfWayPoint+1, end=arr.length-1)
+  } 
 }
+
 
 module.exports = {
   product,
