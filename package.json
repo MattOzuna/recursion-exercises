@@ -1,0 +1,15 @@
+{
+  "name": "dsa-recursion",
+  "version": "1.0.0",
+  "description": "Solved a number of problems using recursion.",
+  "main": "recursion.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}
